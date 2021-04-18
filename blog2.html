@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<!--
+	Number guesser pt. 2
+-->
+<html>
+	<head>
+		<title>Pyathlon - Number Guesser Pt.2</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Pyathlon - Number Guesser Pt.2</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="generic.html">Blog</a></li>
+								<li><a href="services.html">Services</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						<header>
+							<div class="inner">
+								<h2>Number Guesser Pt.2</h2>
+								<p>Learn Basic Python Concepts by Building a Program that Guesses a Random Number of Your Choosing</p>
+							</div>
+						</header>
+
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
+
+									<section>
+										<p>In the previous post, Number Guesser Pt. 1, we built a program that allowed the user to guess a number randomly chosen by the computer. In this post, we will build a program that guesses a number in a pre-set range chosen by the user. This will teach us about functions, methods, f strings, and basic algorithm design.</p>
+                                        <p>To start, let’s decide a range that we can choose numbers from. For sake of ease and cliche, I’m choosing my range to be 1-100. Going much smaller than that allows the computer to guess the number too fast, but going much larger will take the computer too long to guess the number. Now that we have a range, let’s talk about algorithm design.</p>
+                                        <p>I see a few options. The first and most obvious is to have the computer start at 1 and guess in increments of 1 all the way up to 100. There’s a few reasons why this is a horrible algorithm to implement. First, it takes way too long. If the user chooses 97, for example, it will take 97 guesses to get the right number. Second, this algorithm, if implemented on a large scale, is very computationally intensive. We should always concern ourselves with developing programs that get to the solution in the least amount of steps possible. The third and probably most important reason for this project is that the algorithm is just not very impressive. I think we can design a systematic approach that just looks more engaging and fun.</p>
+                                        <p>While a few iterations of the previous algorithm exist, and some are better, the obvious choice for me was to use a method I’ll call ‘sandwiching.’ in this approach, we define an upper and lower bound. At first these bounds will assume the uppermost and lowermost value of range. From there we add those numbers and divide them by 2, if we get a decimal, we round down. If the user’s number is higher than the computer’s guess, the lower bound inherits the value of the computer’s guess. If the user’s number is lower than the computer’s guess, the upper bound inherits the value of the computer’s guess. This process is repeated until the computer ‘sandwiches’ the correct number. This method results in any number being guessed in just a few steps. I’ve provided a visual of what this process may look like below.</p>
+                                        <div class="box alt">
+											<div class="row gtr-uniform">
+												<div class="col-12"><span class="image fit"><img src="images/b2_1.jpg" alt="" /></span></div>
+                                            </div>
+										</div>
+										<p>Fantastic. Now we have a range and an algorithm to guess the user’s number, all that’s left now is to code it up. Let’s start with a skeleton of what this code will look like. I believe we should do this code through two functions, a main, where the code will be called from, and a computer_guess() function, where the computer will decide the number. Once the computer_guess() function is completed, we know the computer is correct, so let’s notify the user.</p>
+										<p>Here’s my code so far:</p>
+										<pre><code>def computer_guess():
+
+if __name__=="__main__":
+    print("choose a number 1-100")
+    computer_guess()
+    print("I guess the computer out-smarted you")</code></pre>
+										<p>All that we have to do now is code the computer_guess() function. Let’s start by defining 3 variables. One, and upper bound equal to 100. Two, a lower bound equal to 1. Finally, let’s define a variable called guessed which will notify us when the computer has successfully guessed the user’s number. Let’s set guessed equal to ‘False’ as the computer has not guessed the user’s number yet, this variable will be used in while loop a little later. Here are my variable declarations:</p>
+										<pre><code>def computer_guess():
+    lower = 1
+    upper = 100
+    guessed = False</code></pre>
+										<p>Next let’s design the while loop. While guessed is false, we will have the computer continue to guess the user’s number. So to find the guessed number let’s create a variable called guess and set it to the integer value of the sum of the upper and lower bounds. That provides us with three options: the computer’s guess is higher, lower, or equal to the user’s number. Let’s ask the user to specify if the computer’s guess is ‘higher’, ‘lower’, or ‘equal’ to their number with the input() method. Next within each of the conditional statements, let’s adjust the bounds as previously explained.</p>
+										<p>Here’s the code for the computer_guess() function:</p>
+										<pre><code>def computer_guess():
+    lower = 1
+    upper = 100
+    guessed = False
+    while not guessed:
+        guess = int((lower+upper)/2)
+        print(f'the computer guessed {guess}')
+        relation = input('is this higher, lower, or equal to your number: ')
+        if relation == 'higher':
+            upper = guess
+        elif relation == 'lower':
+            lower = guess
+        elif relation == 'equal':
+            guessed = True</code></pre>
+										<p>And that’s it! We’ve just coded a program that can guess a user’s number within the range 1 to 100. Here’s an image of my gameplay, my number was 76.</p>
+                                    	<div class="box alt">
+											<div class="row gtr-uniform">
+												<div class="col-12"><span class="image fit"><img src="images/b2_2.jpg" alt="" /></span></div>
+                                            </div>
+										</div>
+										<p>In case you had a difficult time following the code, here’s the code to the entire program:</p>
+										<pre><code>def computer_guess():
+    lower = 1
+    upper = 100
+    guessed = False
+    while not guessed:
+        guess = int((lower+upper)/2)
+        print(f'the computer guessed {guess}')
+        relation = input('is this higher, lower, or equal to your number: ')
+        if relation == 'higher':
+            upper = guess
+        elif relation == 'lower':
+            lower = guess
+        elif relation == 'equal':
+            guessed = True
+
+if __name__=="__main__":
+    print("choose a number 1-100")
+    computer_guess()
+    print("I guess the computer out-smarted you")</code></pre>
+									</section>
+								</div>
+							</div>
+
+					<!-- Footer -->
+					<section id="footer">
+						<div class="inner">
+							<h2 class="major">Get in touch</h2>
+							<p>For business or personal inquiries, please reach out to me. I'll get back to you as soon as I can.</p>
+
+							<p><br>Email address: <a href="mailto:noahbblack@gmail.com">noahbblack@gmail.com</a></p>
+							<!--
+							<form method="post" action="mailto:noahbblack@gmail.com" name="EmailForm">
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="field">
+										<label for="email">Email</label>
+										<input type="email" name="email" id="email" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="4"></textarea>
+									</div>
+								</div>
+
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+							-->
+
+							<ul class="copyright">
+								<li>Noah Black - 2021</li>
+							</ul>
+						</div>
+					</section>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

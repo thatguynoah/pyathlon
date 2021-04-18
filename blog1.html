@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<!--
+	Number guesser pt. 1
+-->
+<html>
+	<head>
+		<title>Pyathlon - Number Guesser Pt. 1</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Pyathlon - Number Guesser Pt. 1</a></h1>
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="generic.html">Blog</a></li>
+								<li><a href="services.html">Services</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						<header>
+							<div class="inner">
+								<h2>Number Guesser Pt. 1</h2>
+								<p> Learn basic Python concepts by building a program that selects a random number that you have to guess.</p>
+							</div>
+						</header>
+
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
+
+									<section>
+										<p>Hi everyone, today I want to go over a small beginner Python project that will teach you many important language concepts. In this project we will build a program that picks a random number that you have to guess. The program will teach novice programmers about functions, passing variables, the Random module, and much more.</p>
+                                        <p>To start, let’s outline what this program will look like. I outlined my program on a digital white board for organization purposes. Basically, this drawing outlines four steps. One: the program will load. Two: the computer will pick a random number in a pre-defined range. Three: the user will guess the number until they get it right. Finally, once the user gets the number right, the program will notify the user and close itself.</p>
+                                        <div class="box alt">
+											<div class="row gtr-uniform">
+												<div class="col-12"><span class="image fit"><img src="images/b1_1.jpg" alt="" /></span></div>
+                                            </div>
+										</div>
+                                        <p>Now that we have a worded and visual idea of the structure of this code, let’s actually program it!</p>
+                                        <pre><code>import random
+
+def randomize():
+
+def guess_it():
+
+if __name__=="__main__":
+    randomize()
+    guess_it()
+    print("Congrats! You won")</code></pre>
+                                        <p>So, what’s going on here? I’ve created three functions: ‘If __name__==“__main__”’, ‘guess_it’, and ‘randomize’. The first of the aforementioned functions basically tells the computer to run the code if this is the primary file run, i.e. functions aren’t being called by other files. We will use the ‘randomize’ function to determine the random number the user has to guess. Finally, the ‘guess_it’ function is where the user will make their guesses. At the top of the file I’ve imported the Random module. This module is pre-installed during your Python download, it will allow us to generate random numbers.</p>
+                                        <p>Now that we have the code outline lets get coding. First let’s code the randomize function. To start let’s define a variable to take the value of the randomly generated number. We’ll set that equal to a function in Random called ‘randint’, this function will generate a random integer in a range that we’ll specify as 1 to 100. Finally let’s return X and save it to the variable set to the function value. This is so the value can be accessed by other functions through the program.</p>
+                                        <pre><code>def randomize():
+    x = random.randint(1,100)
+    return x</code></pre>
+                                        <p>Now we will send the variable to the guess_it function through this format. This will allow us to call the randomly chosen value in this function. Add these modifications to your current code:</p>
+                                        <pre><code>def guess_it(num):
+
+if __name__=="__main__":
+    num = randomize()
+    guess_it(num)
+    print("Congrats! You won")</code></pre>
+                                        <p>Now we can start coding the user end of this program. It is essential that we realize that the program does not move to the next line in the main function until we exit this function. That means once this function is completed, we know the program has completed. Because of that we don’t need to return any values, instead if we exit a for loop when the user guesses the right number, we can exit the function.</p>
+                                        <p>First let’s define a variable, we’ll call it guessed, it's a boolean that represents if the user has guessed the right number. Obviously the initial value should be ‘False’ as the user has not guessed the correct number. Next let’s enter a while loop under the condition that guessed remains false. To get user input, we’ll use the input function. So far your code should look like this:</p>
+                                        <pre><code>def guess_it(num):
+    guessed = False
+    while not guessed:
+        guess = input("guess the number: ")</code></pre>
+                                        <p>Now comes the difficult part, what do we do with the code? Well, there are four options for user input.</p>
+                                        <ol>
+                                            <li>The guessed value is higher than the computer’s number</li>
+                                            <li>The guessed value is lower than the computer’s number</li>
+                                            <li>The guessed value is equal to the computer’s number</li>
+                                            <li>The guessed value is not a number</li>
+                                        </ol>
+                                        <p>Because the input function accepts input as a string, it can’t be compared to an integer value. To convert a string value into an integer, we can use the int() function. Unfortunately, the int() function does not work for all string values: if you try to use it on a letter, it will return an error. Therefore, we must use a try/except structure to test our values. First, we will enter the try area of our code.</p>
+                                        <p>In the try area of our code we can attempt if statement. This if statement will test if the inputted value is lower, higher, or equal to the computer’s value. In each instance, we will hint the user in the direction of the actual number if they are incorrect. If the if statement’s conditions are not met, we enter the except area of our code. Once the user guesses the correct number we will change the value of guessed to True. This will exit the loop and cause the program’s last line to end.</p>
+                                        <p>If we enter the except area of the code that only leaves the fourth option: the user did not not enter an integer value. Because of this, we will notify the user of their error and circle back to the top of our loop.</p>
+                                        <p>Here’s what the code should look like:</p>
+                                        <pre><code>def guess_it(num):
+    guessed = False
+    while not guessed:
+        guess = input("guess the number: ")
+        try:
+            if int(guess) > num:
+                print("the number is lower")
+            elif int(guess) < num:
+                print("the number is higher")
+            elif int(guess) == num:
+                guessed = True
+        except:
+            print("you did not input a number")</code></pre>
+                                        Awesome! Now we have all the pieces to play the game. I hope this was a fun and useful exercise. Here’s an image of one of my trial runs:</p>
+                                        <div class="box alt">
+											<div class="row gtr-uniform">
+												<div class="col-12"><span class="image fit"><img src="images/b1_2.jpg" alt="" /></span></div>
+                                            </div>
+										</div>
+                                        <p>If you weren’t able to follow and complete the entire program, here’s my entire code completely assembled.</p>
+                                        <pre><code>import random
+
+def randomize():
+    x = random.randint(1,100)
+    return x
+
+def guess_it(num):
+    guessed = False
+    while not guessed:
+        guess = input("guess the number: ")
+        try:
+            if int(guess) > num:
+                print("the number is lower")
+            elif int(guess) < num:
+                print("the number is higher")
+            elif int(guess) == num:
+                guessed = True
+        except:
+            print("you did not input a number")
+
+if __name__=="__main__":
+    num = randomize()
+    guess_it(num)
+    print("Congrats! You won")</code></pre>
+                                    </section>
+                                </div>
+                            </div>
+                    </section>
+					<!-- Footer -->
+					<section id="footer">
+						<div class="inner">
+							<h2 class="major">Get in touch</h2>
+							<p>For business or personal inquiries, please reach out to me. I'll get back to you as soon as I can.</p>
+
+							<p><br>Email address: <a href="mailto:noahbblack@gmail.com">noahbblack@gmail.com</a></p>
+							<!--
+							<form method="post" action="mailto:noahbblack@gmail.com" name="EmailForm">
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="field">
+										<label for="email">Email</label>
+										<input type="email" name="email" id="email" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="4"></textarea>
+									</div>
+								</div>
+
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+							-->
+
+							<ul class="copyright">
+								<li>Noah Black - 2021</li>
+							</ul>
+						</div>
+					</section>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
