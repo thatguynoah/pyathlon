@@ -56,7 +56,7 @@
                                         <p>While a few iterations of the previous algorithm exist, and some are better, the obvious choice for me was to use a method I’ll call ‘sandwiching.’ in this approach, we define an upper and lower bound. At first these bounds will assume the uppermost and lowermost value of range. From there we add those numbers and divide them by 2, if we get a decimal, we round down. If the user’s number is higher than the computer’s guess, the lower bound inherits the value of the computer’s guess. If the user’s number is lower than the computer’s guess, the upper bound inherits the value of the computer’s guess. This process is repeated until the computer ‘sandwiches’ the correct number. This method results in any number being guessed in just a few steps. I’ve provided a visual of what this process may look like below.</p>
                                         <div class="box alt">
 											<div class="row gtr-uniform">
-												<div class="col-12"><span class="image fit"><img src="images/b2_1.jpg" alt="" /></span></div>
+												<div class="col-12"><span class="image fit"><img src="images/b2_1.JPG" alt="" /></span></div>
                                             </div>
 										</div>
 										<p>Fantastic. Now we have a range and an algorithm to guess the user’s number, all that’s left now is to code it up. Let’s start with a skeleton of what this code will look like. I believe we should do this code through two functions, a main, where the code will be called from, and a computer_guess() function, where the computer will decide the number. Once the computer_guess() function is completed, we know the computer is correct, so let’s notify the user.</p>
@@ -91,7 +91,7 @@ if __name__=="__main__":
 										<p>And that’s it! We’ve just coded a program that can guess a user’s number within the range 1 to 100. Here’s an image of my gameplay, my number was 76.</p>
                                     	<div class="box alt">
 											<div class="row gtr-uniform">
-												<div class="col-12"><span class="image fit"><img src="images/b2_2.jpg" alt="" /></span></div>
+												<div class="col-12"><span class="image fit"><img src="images/b2_2.JPG" alt="" /></span></div>
                                             </div>
 										</div>
 										<p>In case you had a difficult time following the code, here’s the code to the entire program:</p>
